@@ -1,0 +1,13 @@
+{
+  "name": "danshi",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "domready": "^1.0.8",
+    "react": "^0.13.2"
+  },
+  "devDependencies": {
+    "react": "^0.13.3",
+    "react-dom": "^15.5.4"
+  }
+}
