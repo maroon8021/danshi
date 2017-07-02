@@ -4,6 +4,7 @@ const React = require('react')
 console.log(React)
 const domready = require('domready')
 const globalEmitter = require('./lib/global-emitter')
+const takeScreenshotEmitter = require('./lib/take-screenshot')
 console.log(globalEmitter)
 const BrowserWindow = require('electron').remote.BrowserWindow
 console.log(BrowserWindow)
@@ -55,7 +56,11 @@ const App = React.createClass({
       },
       onMouseUp: function (e) {
         console.log(JSON.stringify(self.state.rect) + "test")
+        console.log(self.state.rect + ":test_2")
         createNewWindow(JSON.stringify(self.state.rect))
+        globalEmitter.emit('consoleEvent');
+        globalEmitter.emit('takeScreenshot');
+        takeScreenshotEmitter.emit('takeScreenshot',self.state.rect);
         console.log("AfterEvent")
         //globalEmitter.emit('createNewWindow',JSON.stringify(self.state.rect))
         self.setState({ cropping: false, rect: {} })
@@ -88,6 +93,9 @@ domready(function () {
 })
 
 function createNewWindow(newWindow) {
+  if (Object.keys(newWindow).length) {
+    return;
+  }
   let mainWindow = new BrowserWindow({
     x: newWindow.x,
     y: newWindow.y,

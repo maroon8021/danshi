@@ -32,7 +32,7 @@ app.on('ready', function () {
     y: 0,
     width: size.width,
     height: size.height,
-    frame: true,
+    frame: false,
     show: true,
     transparent: true,
     resizable: false,
@@ -92,7 +92,6 @@ globalEmitter.on('createNewWindow', (newWindow) => {
 
 
 
-/*
 const globalShortcut = electron.globalShortcut
 
 app.on('ready', () => {
@@ -105,20 +104,4 @@ app.on('ready', () => {
   globalShortcut.register('CommandOrControl+3', () => {
     mainProcessEmitter.emit('event');
   })
-  globalShortcut.register('CommandOrControl+2', () => {
-    createNewWindow(200,200)
-  })
-  function createNewWindow(a,b){
-    mainWindow = new BrowserWindow({
-    x: 0,
-    y: 0,
-    width: a,
-    height: b,
-    frame: false,
-    show: true,
-    resizable: false,
-    'always-on-top': true
-  })
-  }
 })
-*/
