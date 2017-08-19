@@ -1,15 +1,13 @@
 'use strict'
 const electron = require('electron')
 const React = require('react')
-console.log(React)
 const domready = require('domready')
 const globalEmitter = require('./lib/global-emitter')
 const takeScreenshotEmitter = require('./lib/take-screenshot')
-console.log(globalEmitter)
 const BrowserWindow = require('electron').remote.BrowserWindow
-console.log(BrowserWindow)
-//const mainProcessEmitter = require('./main')
 
+const os = require('os')
+//const mainProcessEmitter = require('./main')
 
 function createRect (a, b) {
   return {
@@ -60,7 +58,20 @@ const App = React.createClass({
         createNewWindow(JSON.stringify(self.state.rect))
         globalEmitter.emit('consoleEvent');
         globalEmitter.emit('takeScreenshot');
-        takeScreenshotEmitter.emit('takeScreenshot',self.state.rect);
+
+        let pictureSize = self.state.rect
+        console.log("first : ");
+        console.log(pictureSize)
+        console.log(os.type)
+
+        if(os.type()!='Darwin'){
+          console.log("This is Mac os")
+          pictureSize.y += electron.screen.getMenuBarHeight();
+        }
+        console.log("second : ");
+        console.log(pictureSize)
+
+        takeScreenshotEmitter.emit('takeScreenshot',pictureSize);
         console.log("AfterEvent")
         //globalEmitter.emit('createNewWindow',JSON.stringify(self.state.rect))
         self.setState({ cropping: false, rect: {} })
@@ -101,7 +112,7 @@ function createNewWindow(newWindow) {
     y: newWindow.y,
     width: newWindow.width,
     height: newWindow.false,
-    frame: true,
+    frame: false,
     show: true,
     resizable: false,
     //transparent:true,
