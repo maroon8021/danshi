@@ -41,6 +41,8 @@ app.on('ready', function () {
 
   mainWindow.maximize()
 
+  mainWindow.webContents.openDevTools()
+
   mainWindow.loadURL(`file://${__dirname}/index.html`)
   mainWindow.on('closed', function () {
     mainWindow = null
@@ -58,7 +60,7 @@ app.on('ready', () => {
     {label: '終了', accelerator: 'Command+Q', role: 'quit'},
     {label: 'hide', click: mainWindow.hide()},
     ])
-  
+
   appIcon.setContextMenu(contextMenu)
 
 function appToggle(){
@@ -66,7 +68,7 @@ function appToggle(){
 function toggleOnApp(boolean) {
   boolean ? mainWindow.show() : mainWindow.hide()
   onApp = boolean;
-} 
+}
 }
 
 })

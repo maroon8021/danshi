@@ -64,7 +64,7 @@ const App = React.createClass({
         console.log(pictureSize)
         console.log(os.type)
 
-        if(os.type()!='Darwin'){
+        if(os.type()=='Darwin'){
           console.log("This is Mac os")
           pictureSize.y += electron.screen.getMenuBarHeight();
         }
