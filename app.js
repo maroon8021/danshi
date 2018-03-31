@@ -59,15 +59,21 @@ const App = React.createClass({
         globalEmitter.emit('consoleEvent');
         globalEmitter.emit('takeScreenshot');
 
-        let pictureSize = self.state.rect
+        var pictureSize = self.state.rect
         console.log("first : ");
-        console.log(pictureSize)
+        var pictureSizeLog = pictureSize;
+        console.log(pictureSizeLog.y.toString())
         console.log(os.type)
 
+        var menuHeight = 0;
         if(os.type()=='Darwin'){
           console.log("This is Mac os")
-          pictureSize.y += electron.screen.getMenuBarHeight();
+          console.log(electron.screen.getMenuBarHeight())
+          menuHeight = electron.screen.getMenuBarHeight();
         }
+        console.log(pictureSize.y)
+        pictureSize['y'] += menuHeight;
+        console.log(pictureSize.y)
         console.log("second : ");
         console.log(pictureSize)
 
